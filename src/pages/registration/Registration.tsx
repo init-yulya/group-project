@@ -20,7 +20,8 @@ export default function Registration() {
         resolver: yupResolver(schema),
     })
 
-    const handleSubmitForm = (event: React.FormEvent<HTMLFormElement>) => {
+    //Заменить на React.FormEvent<HTMLFormElement>
+    const handleSubmitForm = (event: any) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
     };
