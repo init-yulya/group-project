@@ -24,7 +24,6 @@ export default function Login() {
     const handleSubmitForm = (event: any) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
-
     };
 
     return (
@@ -50,7 +49,6 @@ export default function Login() {
                             label="Email"
                             autoComplete="email"
                             autoFocus
-                            placeholder="Введите ваш email"
                             error={!!errors.email}
                             helperText={errors.email ? `${errors.email.message}` : ''}
                             {...register('email')}
@@ -58,7 +56,7 @@ export default function Login() {
                         <TextField
                             margin="normal"
                             fullWidth
-                            label="Password"
+                            label="Пароль"
                             type="password"
                             id="password"
                             autoComplete="current-password"
