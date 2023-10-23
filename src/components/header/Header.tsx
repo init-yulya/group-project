@@ -37,7 +37,7 @@ export default function Header() {
 
     return (
         <AppBar position="static">
-            <Container maxWidth="xl" sx={{ backgroundColor: "black" }}>
+            <Container maxWidth='xl' sx={{ backgroundColor: "black" }}>
                 <Toolbar disableGutters >
                     <Typography
                         variant="h6"
