@@ -37,7 +37,7 @@ export default function Header() {
 
     return (
         <AppBar position="static">
-            <Container maxWidth='xl' sx={{ backgroundColor: "black" }}>
+            <Container maxWidth='xl' sx={{ backgroundColor: "#1A1B22" }}>
                 <Toolbar disableGutters >
                     <Typography
                         variant="h6"
@@ -52,7 +52,14 @@ export default function Header() {
                             textDecoration: 'none',
                         }}
                     >
-                        YandexLogo
+                        <svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 44 44" fill="none">
+                            <rect width="44" height="44" fill="#1A1B22" />
+                            <rect x="32.8977" y="30.7109" width="2.64193" height="21.7959" transform="rotate(90 32.8977 30.7109)" fill="white" />
+                            <rect x="22.8254" y="10.2363" width="2.64193" height="21.7959" transform="rotate(-30 22.8254 10.2363)" fill="white" />
+                            <rect width="2.64193" height="21.7959" transform="matrix(-0.866025 -0.5 -0.5 0.866025 21.1746 10.2363)" fill="white" />
+                            <rect x="33.7236" y="30.6738" width="2.64193" height="5.28385" fill="white" />
+                            <rect x="7.63501" y="30.6738" width="2.64193" height="5.28385" fill="white" />
+                        </svg>
                     </Typography>
 
                     <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -117,7 +124,7 @@ export default function Header() {
                     >
                         YandexLogo
                     </Typography>
-                    
+
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                         {pages.map((page) => (
                             <Button
