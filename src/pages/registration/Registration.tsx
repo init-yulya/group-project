@@ -8,7 +8,13 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
+import { unwrapResult } from '@reduxjs/toolkit';
+import { Navigate } from 'react-router-dom';
+import { ChangeEvent, useState } from 'react';
 import { schema } from '../../utils/validation/yupSchema';
+import useAuth from '../../utils/useAuth';
+import { useAppDispatch } from '../../store/store';
+import { getUser, signinUser, signupUser } from '../../store/userSlice';
 
 export default function Registration() {
   const {
@@ -19,16 +25,74 @@ export default function Registration() {
     resolver: yupResolver(schema),
   });
 
+  const dispatch = useAppDispatch();
+
+  const [firstName, setFirstName] = useState('');
+  const [secondName, setSecondName] = useState('');
+  const [login, setLogin] = useState('');
+  const [phone, setPhone] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.currentTarget as HTMLInputElement;
+    const fieldName = (e.currentTarget as HTMLInputElement).id;
+    switch (fieldName) {
+      case 'first_name':
+        setFirstName(value);
+        break;
+      case 'second_name':
+        setSecondName(value);
+        break;
+      case 'login':
+        setLogin(value);
+        break;
+      case 'email':
+        setEmail(value);
+        break;
+      case 'phone':
+        setPhone(value);
+        break;
+      case 'password':
+        setPassword(value);
+        break;
+    }
+  };
+
   // Заменить на React.FormEvent<HTMLFormElement>
   const handleSubmitForm = (event: any) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-  };
 
+    interface RegisterData {
+      first_name: string,
+      second_name: string,
+      login: string,
+      email: string,
+      password: string,
+      phone: string
+    }
+
+    const registrationData: RegisterData = {
+      first_name: firstName,
+      second_name: secondName,
+      login,
+      email,
+      password,
+      phone,
+    };
+
+    dispatch(signupUser(registrationData))
+      .then(unwrapResult)
+      .then(() => dispatch(getUser()))
+      .catch((reason) => console.log(reason));
+  };
+  if (useAuth()) {
+    return <Navigate replace to="/home" />;
+  }
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
-      <form onSubmit={handleSubmit(handleSubmitForm)}>
+      <form onSubmit={handleSubmitForm}>
         <Box
           sx={{
             marginTop: 8,
@@ -44,27 +108,42 @@ export default function Registration() {
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <TextField
-                  autoComplete="given-name"
                   required
                   fullWidth
-                  id="firstName"
+                  id="first_name"
+                  value={firstName}
                   label="Имя"
-                  autoFocus
                   error={!!errors.name}
                   helperText={errors.name ? `${errors.name.message}` : ''}
                   {...register('name')}
+                  onChange={handleChange}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
                   required
                   fullWidth
-                  id="lastName"
+                  id="second_name"
+                  value={secondName}
                   label="Фамилия"
                   autoComplete="family-name"
                   error={!!errors.lastName}
                   helperText={errors.lastName ? `${errors.lastName.message}` : ''}
                   {...register('lastName')}
+                  onChange={handleChange}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  required
+                  fullWidth
+                  id="login"
+                  value={login}
+                  label="login"
+                  /* error={!!errors.lastName}
+                  helperText={errors.lastName ? `${errors.lastName.message}` : ''}
+                  {...register('lastName')} */
+                  onChange={handleChange}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -72,11 +151,26 @@ export default function Registration() {
                   required
                   fullWidth
                   id="email"
+                  value={email}
                   label="Email"
                   autoComplete="email"
                   error={!!errors.email}
                   helperText={errors.email ? `${errors.email.message}` : ''}
                   {...register('email')}
+                  onChange={handleChange}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  id="phone"
+                  value={phone}
+                  label="phone"
+                  /* error={!!errors.email}
+                  helperText={errors.email ? `${errors.email.message}` : ''}
+                  {...register('email')} */
+                  onChange={handleChange}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -86,10 +180,12 @@ export default function Registration() {
                   label="Пароль"
                   type="password"
                   id="password"
+                  value={password}
                   autoComplete="new-password"
                   error={!!errors.password}
                   helperText={errors.password ? `${errors.password.message}` : ''}
                   {...register('password')}
+                  onChange={handleChange}
                 />
               </Grid>
             </Grid>
