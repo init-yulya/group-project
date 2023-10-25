@@ -4,6 +4,7 @@ import Registration from './pages/registration/Registration';
 import Header from './components/header/Header';
 import Profile from './pages/profile/Profile';
 
+
 export default function App() {
   return (
     <>
