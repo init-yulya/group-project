@@ -9,11 +9,11 @@ import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import { Link } from 'react-router-dom';
-import { useState } from 'react'
-import { useSelector } from 'react-redux'
-import { Store } from '../../store/store.types'
-import { useAppDispatch } from '../../store/store'
-import { clearUser, logoutUser } from '../../store/userSlice'
+import { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { Store } from '../../store/store.types';
+import { useAppDispatch } from '../../store/store';
+import { clearUser, logoutUser } from '../../store/userSlice';
 
 export const pages = [
   {
@@ -42,13 +42,13 @@ export default function Header() {
   };
 
   const onLogout = () => {
-    setAnchorElNav(null)
+    setAnchorElNav(null);
 
     dispatch(logoutUser())
       .then(() => {
-        dispatch(clearUser())
-      })
-  }
+        dispatch(clearUser());
+      });
+  };
 
   return (
     <AppBar position="static">

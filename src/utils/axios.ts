@@ -1,65 +1,65 @@
-import axios, {AxiosError, CancelTokenSource} from 'axios';
+import axios, { AxiosError, CancelTokenSource } from 'axios';
 import qs from 'qs';
 
 const BASE_URL = 'https://ya-praktikum.tech/api/v2';
 
 const CANCEL_REQUEST = 'cancel request';
 
-const CancelToken = axios.CancelToken;
+const { CancelToken } = axios;
 export const tokenSource = CancelToken.source();
 
 interface CancelTokenHandler {
-    [key: string]: {
-        handleRequestCancellation: () => CancelTokenSource | undefined;
-    };
+  [key: string]: {
+    handleRequestCancellation: () => CancelTokenSource | undefined;
+  };
 }
 
 interface CancelTokenRequestHandler {
-    cancelToken: CancelTokenSource | undefined;
+  cancelToken: CancelTokenSource | undefined;
 }
 
 export function createCancelTokenHandler(thunks: string[]) {
-    const cancelTokenHandler: CancelTokenHandler = {};
+  const cancelTokenHandler: CancelTokenHandler = {};
 
-    thunks.forEach((propertyName) => {
-        const cancelTokenRequestHandler: CancelTokenRequestHandler = {
-            cancelToken: undefined
-        };
+  thunks.forEach((propertyName) => {
+    const cancelTokenRequestHandler: CancelTokenRequestHandler = {
+      cancelToken: undefined,
+    };
 
-        cancelTokenHandler[propertyName] = {
-            handleRequestCancellation: () => {
-                if (cancelTokenRequestHandler.cancelToken) {
-                    cancelTokenRequestHandler.cancelToken.cancel(CANCEL_REQUEST);
-                }
+    cancelTokenHandler[propertyName] = {
+      handleRequestCancellation: () => {
+        if (cancelTokenRequestHandler.cancelToken) {
+          cancelTokenRequestHandler.cancelToken.cancel(CANCEL_REQUEST);
+        }
 
-                cancelTokenRequestHandler.cancelToken = CancelToken.source();
+        cancelTokenRequestHandler.cancelToken = CancelToken.source();
 
-                return cancelTokenRequestHandler.cancelToken;
-            }
-        };
-    });
+        return cancelTokenRequestHandler.cancelToken;
+      },
+    };
+  });
 
-    return cancelTokenHandler;
+  return cancelTokenHandler;
 }
 
 export const responseInterceptorError = (error: AxiosError | Error | any) => {
-    if (error.message !== CANCEL_REQUEST) {
-        if (error.error) {
-            console.log(error.error);
-        } else {
-            console.log(error);
-        }
+  if (error.message !== CANCEL_REQUEST) {
+    if (error.error) {
+      console.log(error.error);
+    } else {
+      console.log(error);
     }
-    return Promise.reject(error);
+  }
+  return Promise.reject(error);
 };
 
 export const axiosInstance = axios.create({
-    baseURL: BASE_URL,
-    withCredentials: true,
-    timeout: 3000,
+  baseURL: BASE_URL,
+  withCredentials: true,
+  timeout: 3000,
 });
 
 axiosInstance.interceptors.response.use(undefined, responseInterceptorError);
 axiosInstance.defaults.paramsSerializer = {
-    serialize: (params) => qs.stringify(params, {arrayFormat: 'repeat'})
+  serialize: (params) => qs.stringify(params, { arrayFormat: 'repeat' }),
 };

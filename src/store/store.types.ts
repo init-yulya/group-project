@@ -1,5 +1,5 @@
-import { UserSlice } from "./userSlice.types";
+import { UserSlice } from './userSlice.types';
 
 export interface Store {
-    user: UserSlice;
+  user: UserSlice;
 }
