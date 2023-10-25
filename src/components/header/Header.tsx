@@ -8,8 +8,12 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
-import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useState } from 'react'
+import { useSelector } from 'react-redux'
+import { Store } from '../../store/store.types'
+import { useAppDispatch } from '../../store/store'
+import { clearUser, logoutUser } from '../../store/userSlice'
 
 export const pages = [
   {
@@ -25,6 +29,8 @@ export const pages = [
 ];
 
 export default function Header() {
+  const dispatch = useAppDispatch();
+  const user = useSelector((state: Store) => state.user.user);
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -34,6 +40,15 @@ export default function Header() {
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
+
+  const onLogout = () => {
+    setAnchorElNav(null)
+
+    dispatch(logoutUser())
+      .then(() => {
+        dispatch(clearUser())
+      })
+  }
 
   return (
     <AppBar position="static">
@@ -101,6 +116,9 @@ export default function Header() {
                   </Typography>
                 </MenuItem>
               ))}
+              <MenuItem onClick={onLogout}>
+                <span>Выйти</span>
+              </MenuItem>
             </Menu>
           </Box>
 
@@ -133,6 +151,9 @@ export default function Header() {
                 {page.name}
               </Button>
             ))}
+            <MenuItem onClick={onLogout}>
+              <span>Выйти</span>
+            </MenuItem>
           </Box>
         </Toolbar>
       </Container>
