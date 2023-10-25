@@ -12,6 +12,7 @@
   },
   "devDependencies": {
     "@hookform/resolvers": "^3.3.2",
+    "@types/qs": "^6.9.9",
     "@types/react": "18.2.31",
     "@types/react-dom": "18.2.14",
     "@types/react-redux": "^7.1.28",
@@ -34,7 +35,10 @@
     "@hookform/resolvers": "^3.3.2",
     "@mui/icons-material": "5.14.14",
     "@mui/material": "5.14.14",
+    "@reduxjs/toolkit": "^1.9.7",
     "@vitejs/plugin-react": "4.1.0",
+    "axios": "^1.5.1",
+    "qs": "^6.11.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.47.0",
