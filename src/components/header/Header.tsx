@@ -22,6 +22,11 @@ export const pages = [
         path: '/registration',
         id: 2
     },
+    {
+        name: 'Создать вакансию',
+        path: '/vacancy',
+        id: 3
+    },
 ]
 
 export default function Header() {
