@@ -9,6 +9,7 @@ import Login from './pages/login/Login';
 import Registration from './pages/registration/Registration';
 import Header from './components/header/Header';
 import Home from './pages/home/Home';
+import VacancyCard from './components/vacancyCard/VacancyCard';
 
 export default function App() {
   const dispatch = useAppDispatch();
@@ -16,6 +17,7 @@ export default function App() {
 
   useEffect(() => {
     dispatch(getUser());
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (isUserLoading) {
@@ -30,6 +32,7 @@ export default function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/registration" element={<Registration />} />
         <Route path="/home" element={<Home />} />
+        <Route path="/card" element={<VacancyCard />} />
       </Routes>
     </>
   );
