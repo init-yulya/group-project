@@ -1,7 +1,7 @@
 import axios, { AxiosError, CancelTokenSource } from 'axios';
 import qs from 'qs';
 
-const BASE_URL = 'https://158.160.119.78/api';
+const BASE_URL = 'https://tracker-hiring.ddns.net/api';
 
 const CANCEL_REQUEST = 'cancel request';
 
