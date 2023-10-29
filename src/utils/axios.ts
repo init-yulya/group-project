@@ -7,7 +7,7 @@ const CANCEL_REQUEST = 'cancel request';
 
 const { CancelToken } = axios;
 export const tokenSource = CancelToken.source();
-
+/*
 interface CancelTokenHandler {
   [key: string]: {
     handleRequestCancellation: () => CancelTokenSource | undefined;
@@ -40,7 +40,7 @@ export function createCancelTokenHandler(thunks: string[]) {
   });
 
   return cancelTokenHandler;
-}
+}*/
 
 export const responseInterceptorError = (error: AxiosError | Error | any) => {
   if (error.message !== CANCEL_REQUEST) {
@@ -55,7 +55,7 @@ export const responseInterceptorError = (error: AxiosError | Error | any) => {
 
 export const axiosInstance = axios.create({
   baseURL: BASE_URL,
-  withCredentials: true,
+  withCredentials: false,
   timeout: 3000,
 });
 

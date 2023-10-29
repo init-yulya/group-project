@@ -90,7 +90,7 @@ export default function Registration() {
 
     dispatch(signupUser(registrationData))
       .then(unwrapResult)
-      .then(() => dispatch(getUser()))
+      //.then(() => dispatch(getUser()))
       .catch((reason) => console.log(reason));
   };
   if (useAuth()) {

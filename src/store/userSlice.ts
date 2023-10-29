@@ -26,7 +26,7 @@ export const signinUser = createAsyncThunk(
   async (data: LoginRequestData) => {
     const response = await axiosInstance({
       method: 'POST',
-      url: '/users',
+      url: '/users/',
       data,
     });
 
@@ -39,7 +39,7 @@ export const signupUser = createAsyncThunk(
   async (data: RegisterRequestData) => {
     const response = await axiosInstance({
       method: 'POST',
-      url: '/users',
+      url: '/users/',
       data,
     });
 
