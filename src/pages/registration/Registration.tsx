@@ -83,6 +83,7 @@ export default function Registration() {
       telegram,
       email,
       password,
+      company,
       phone_number: phoneNumber,
     };
 
