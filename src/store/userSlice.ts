@@ -10,22 +10,23 @@ const LOGOUT = 'LOGOUT';
 export const initialStateUser: UserSlice = {
   user: {
     id: undefined,
-    login: '',
-    first_name: '',
-    second_name: '',
-    display_name: '',
     email: '',
-    phone: '',
+    first_name: '',
+    last_name: '',
+    telegram: '',
+    phone_number: '',
+    company: '',
+    password: '',
   },
   isUserLoading: true,
 };
 
 export const signinUser = createAsyncThunk(
-  `user/${SIGN_IN}`,
+  `users/${SIGN_IN}`,
   async (data: LoginRequestData) => {
     const response = await axiosInstance({
       method: 'POST',
-      url: '/auth/signin',
+      url: '/users',
       data,
     });
 
@@ -34,11 +35,11 @@ export const signinUser = createAsyncThunk(
 );
 
 export const signupUser = createAsyncThunk(
-  `user/${SIGN_UP}`,
+  `users/${SIGN_UP}`,
   async (data: RegisterRequestData) => {
     const response = await axiosInstance({
       method: 'POST',
-      url: '/auth/signup',
+      url: '/users',
       data,
     });
 
