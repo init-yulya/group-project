@@ -74,7 +74,8 @@ export default function Registration() {
       telegram: string,
       email: string,
       password: string,
-      phone_number: string
+      phone_number: string,
+      company: string,
     }
 
     const registrationData: RegisterData = {
