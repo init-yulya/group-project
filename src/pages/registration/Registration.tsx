@@ -14,7 +14,7 @@ import { ChangeEvent, useState } from 'react';
 import { schema } from '../../utils/validation/yupSchema';
 import useAuth from '../../utils/useAuth';
 import { useAppDispatch } from '../../store/store';
-import { getUser, signinUser, signupUser } from '../../store/userSlice';
+import { getUser, signupUser } from '../../store/userSlice';
 
 export default function Registration() {
   const {
@@ -29,29 +29,34 @@ export default function Registration() {
 
   const [firstName, setFirstName] = useState('');
   const [secondName, setSecondName] = useState('');
-  const [login, setLogin] = useState('');
-  const [phone, setPhone] = useState('');
+  const [telegram, setTelegram] = useState('');
+  const [phoneNumber, setPhone] = useState('');
   const [email, setEmail] = useState('');
+  const [company, setCompany] = useState('');
   const [password, setPassword] = useState('');
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.currentTarget as HTMLInputElement;
     const fieldName = (e.currentTarget as HTMLInputElement).id;
+    // eslint-disable-next-line default-case
     switch (fieldName) {
       case 'first_name':
         setFirstName(value);
         break;
-      case 'second_name':
+      case 'last_name':
         setSecondName(value);
         break;
-      case 'login':
-        setLogin(value);
+      case 'telegram':
+        setTelegram(value);
         break;
       case 'email':
         setEmail(value);
         break;
-      case 'phone':
+      case 'phoneNumber':
         setPhone(value);
+        break;
+      case 'company':
+        setCompany(value);
         break;
       case 'password':
         setPassword(value);
@@ -65,20 +70,20 @@ export default function Registration() {
 
     interface RegisterData {
       first_name: string,
-      second_name: string,
-      login: string,
+      last_name: string,
+      telegram: string,
       email: string,
       password: string,
-      phone: string
+      phone_number: string
     }
 
     const registrationData: RegisterData = {
       first_name: firstName,
-      second_name: secondName,
-      login,
+      last_name: secondName,
+      telegram,
       email,
       password,
-      phone,
+      phone_number: phoneNumber,
     };
 
     dispatch(signupUser(registrationData))
@@ -123,7 +128,7 @@ export default function Registration() {
                 <TextField
                   required
                   fullWidth
-                  id="second_name"
+                  id="last_name"
                   value={secondName}
                   label="Фамилия"
                   autoComplete="family-name"
@@ -133,13 +138,13 @@ export default function Registration() {
                   onChange={handleChange}
                 />
               </Grid>
-              <Grid item xs={12} sm={6}>
+              <Grid item xs={12}>
                 <TextField
                   required
                   fullWidth
-                  id="login"
-                  value={login}
-                  label="login"
+                  id="telegram"
+                  value={telegram}
+                  label="telegram"
                   /* error={!!errors.lastName}
                   helperText={errors.lastName ? `${errors.lastName.message}` : ''}
                   {...register('lastName')} */
@@ -164,12 +169,26 @@ export default function Registration() {
                 <TextField
                   required
                   fullWidth
-                  id="phone"
-                  value={phone}
+                  id="phoneNumber"
+                  value={phoneNumber}
                   label="phone"
                   /* error={!!errors.email}
                   helperText={errors.email ? `${errors.email.message}` : ''}
                   {...register('email')} */
+                  onChange={handleChange}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  label="Компания"
+                  type="company"
+                  id="company"
+                  value={company}
+                  /* error={!!errors.password}
+                  helperText={errors.password ? `${errors.password.message}` : ''}
+                  {...register('password')} */
                   onChange={handleChange}
                 />
               </Grid>
@@ -199,7 +218,7 @@ export default function Registration() {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link href="/login" variant="body2">
                   Уже есть аккаунт?
                 </Link>
               </Grid>
