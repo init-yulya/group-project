@@ -8,7 +8,13 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
+import { unwrapResult } from '@reduxjs/toolkit';
+import { Navigate } from 'react-router-dom';
+import { ChangeEvent, useState } from 'react';
 import { schema } from '../../utils/validation/yupSchema';
+import useAuth from '../../utils/useAuth';
+import { useAppDispatch } from '../../store/store';
+import { getUser, signinUser } from '../../store/userSlice';
 
 export default function Login() {
   const {
@@ -18,17 +24,47 @@ export default function Login() {
   } = useForm({
     resolver: yupResolver(schema),
   });
+  const dispatch = useAppDispatch();
+  const [login, setLogin] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.currentTarget as HTMLInputElement;
+    const fieldName = (e.currentTarget as HTMLInputElement).id;
+    switch (fieldName) {
+      case 'login':
+        setLogin(value);
+        break;
+      case 'password':
+        setPassword(value);
+        break;
+    }
+  };
 
   // Заменить на React.FormEvent<HTMLFormElement>
   const handleSubmitForm = (event: any) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-  };
+    interface LoginData {
+      login: string,
+      password: string
+    }
+    const loginData: LoginData = {
+      login,
+      password,
+    };
 
+    dispatch(signinUser(loginData))
+      .then(unwrapResult)
+      .then(() => dispatch(getUser()))
+      .catch((reason) => console.log(reason));
+  };
+  if (useAuth()) {
+    return <Navigate replace to="/home" />;
+  }
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
-      <form onSubmit={handleSubmit(handleSubmitForm)}>
+      <form onSubmit={handleSubmitForm}>
         <Box
           sx={{
             marginTop: 8,
@@ -44,13 +80,15 @@ export default function Login() {
             <TextField
               margin="normal"
               fullWidth
-              id="email"
-              label="Email"
-              autoComplete="email"
+              id="login"
+              label="Логин"
+              autoComplete="login"
               autoFocus
-              error={!!errors.email}
+              value={login}
+              /* error={!!errors.email}
               helperText={errors.email ? `${errors.email.message}` : ''}
-              {...register('email')}
+              {...register('email')} */
+              onChange={handleChange}
             />
             <TextField
               margin="normal"
@@ -59,9 +97,11 @@ export default function Login() {
               type="password"
               id="password"
               autoComplete="current-password"
+              value={password}
               error={!!errors.password}
               helperText={errors.password ? `${errors.password.message}` : ''}
               {...register('password')}
+              onChange={handleChange}
             />
             <Button
               type="submit"
