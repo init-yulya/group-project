@@ -26,6 +26,11 @@ export const pages = [
     path: '/registration',
     id: 2,
   },
+  {
+    name: 'Профиль',
+    path: '/profile',
+    id: 3,
+  },
 ];
 
 export default function Header() {
