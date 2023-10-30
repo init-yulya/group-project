@@ -9,10 +9,8 @@ import Container from '@mui/material/Container';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import { unwrapResult } from '@reduxjs/toolkit';
-import { Navigate } from 'react-router-dom';
 import { ChangeEvent, useState } from 'react';
 import { schema } from '../../utils/validation/yupSchema';
-import useAuth from '../../utils/useAuth';
 import { useAppDispatch } from '../../store/store';
 import { signupUser } from '../../store/userSlice';
 
@@ -94,141 +92,146 @@ export default function Registration() {
       .then(unwrapResult)
       .catch((reason) => console.log(reason));
   };
-  if (useAuth()) {
-    return <Navigate replace to="/home" />;
-  }
+
   return (
-    <Container component="main" maxWidth="xs">
+    <Container component="main" className="authPage">
       <CssBaseline />
-      <form onSubmit={handleSubmitForm}>
-        <Box
-          sx={{
-            marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}
-        >
-          <Typography component="h1" variant="h5">
-            Регистрация
-          </Typography>
-          <Box sx={{ mt: 3 }}>
-            <Grid container spacing={2}>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  required
-                  fullWidth
-                  id="first_name"
-                  value={firstName}
-                  label="Имя"
-                  error={!!errors.name}
-                  helperText={errors.name ? `${errors.name.message}` : ''}
-                  {...register('name')}
-                  onChange={handleChange}
-                />
+      <Container maxWidth="xs">
+        <form onSubmit={handleSubmitForm}>
+          <Box
+            sx={{
+              boxShadow: 3,
+              borderRadius: '12px',
+              px: 3,
+              py: 3,
+              marginTop: 8,
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              width: '400px',
+            }}
+          >
+            <Typography component="h2" variant="h5" sx={{ fontSize: 24 }}>
+              Карьерный Трекер.Найм
+            </Typography>
+            <Box sx={{ mt: 3 }}>
+              <Grid container spacing={2}>
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    required
+                    fullWidth
+                    id="first_name"
+                    value={firstName}
+                    label="Имя"
+                    error={!!errors.name}
+                    helperText={errors.name ? `${errors.name.message}` : ''}
+                    {...register('name')}
+                    onChange={handleChange}
+                  />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    required
+                    fullWidth
+                    id="last_name"
+                    value={secondName}
+                    label="Фамилия"
+                    autoComplete="family-name"
+                    error={!!errors.lastName}
+                    helperText={errors.lastName ? `${errors.lastName.message}` : ''}
+                    {...register('lastName')}
+                    onChange={handleChange}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    required
+                    fullWidth
+                    id="telegram"
+                    value={telegram}
+                    label="telegram"
+                    error={!!errors.lastName}
+                    helperText={errors.lastName ? `${errors.lastName.message}` : ''}
+                    {...register('lastName')}
+                    onChange={handleChange}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    required
+                    fullWidth
+                    id="email"
+                    value={email}
+                    label="Почта"
+                    autoComplete="email"
+                    error={!!errors.email}
+                    helperText={errors.email ? `${errors.email.message}` : ''}
+                    {...register('email')}
+                    onChange={handleChange}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    required
+                    fullWidth
+                    id="phoneNumber"
+                    value={phoneNumber}
+                    label="Телефон"
+                    /* error={!!errors.phone}
+                    helperText={errors.phone ? `${errors.phone.message}` : ''}
+                    {...register('phone')} */
+                    onChange={handleChange}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    required
+                    fullWidth
+                    label="Компания"
+                    type="company"
+                    id="company"
+                    value={company}
+                    /* error={!!errors.password}
+                    helperText={errors.password ? `${errors.password.message}` : ''}
+                    {...register('password')} */
+                    onChange={handleChange}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    required
+                    fullWidth
+                    label="Пароль"
+                    type="password"
+                    id="password"
+                    value={password}
+                    autoComplete="new-password"
+                    error={!!errors.password}
+                    helperText={errors.password ? `${errors.password.message}` : ''}
+                    {...register('password')}
+                    onChange={handleChange}
+                  />
+                </Grid>
               </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  required
-                  fullWidth
-                  id="last_name"
-                  value={secondName}
-                  label="Фамилия"
-                  autoComplete="family-name"
-                  error={!!errors.lastName}
-                  helperText={errors.lastName ? `${errors.lastName.message}` : ''}
-                  {...register('lastName')}
-                  onChange={handleChange}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  id="telegram"
-                  value={telegram}
-                  label="telegram"
-                  /* error={!!errors.lastName}
-                  helperText={errors.lastName ? `${errors.lastName.message}` : ''}
-                  {...register('lastName')} */
-                  onChange={handleChange}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  id="email"
-                  value={email}
-                  label="Email"
-                  autoComplete="email"
-                  error={!!errors.email}
-                  helperText={errors.email ? `${errors.email.message}` : ''}
-                  {...register('email')}
-                  onChange={handleChange}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  id="phoneNumber"
-                  value={phoneNumber}
-                  label="phone"
-                  /* error={!!errors.email}
-                  helperText={errors.email ? `${errors.email.message}` : ''}
-                  {...register('email')} */
-                  onChange={handleChange}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  label="Компания"
-                  type="company"
-                  id="company"
-                  value={company}
-                  /* error={!!errors.password}
-                  helperText={errors.password ? `${errors.password.message}` : ''}
-                  {...register('password')} */
-                  onChange={handleChange}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  label="Пароль"
-                  type="password"
-                  id="password"
-                  value={password}
-                  autoComplete="new-password"
-                  error={!!errors.password}
-                  helperText={errors.password ? `${errors.password.message}` : ''}
-                  {...register('password')}
-                  onChange={handleChange}
-                />
-              </Grid>
-            </Grid>
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-            >
-              Зарегестрироваться
-            </Button>
-            <Grid container justifyContent="flex-end">
-              <Grid item>
-                <Link href="/login" variant="body2">
-                  Уже есть аккаунт?
-                </Link>
-              </Grid>
-            </Grid>
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 2, borderRadius: '6' }}
+              >
+                Зарегестрироваться
+              </Button>
+            </Box>
           </Box>
-        </Box>
-      </form>
+        </form>
+        <Grid container justifyContent="flex-end">
+          <Grid item>
+            <Link href="/login" variant="body2" underline="none">
+              Уже есть аккаунт?
+            </Link>
+          </Grid>
+        </Grid>
+      </Container>
     </Container>
   );
 }
