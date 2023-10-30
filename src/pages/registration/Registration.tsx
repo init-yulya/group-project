@@ -148,9 +148,9 @@ export default function Registration() {
                     id="telegram"
                     value={telegram}
                     label="telegram"
-                  /* error={!!errors.lastName}
-                  helperText={errors.lastName ? `${errors.lastName.message}` : ''}
-                  {...register('lastName')} */
+                    error={!!errors.lastName}
+                    helperText={errors.lastName ? `${errors.lastName.message}` : ''}
+                    {...register('lastName')}
                     onChange={handleChange}
                   />
                 </Grid>
@@ -175,9 +175,9 @@ export default function Registration() {
                     id="phoneNumber"
                     value={phoneNumber}
                     label="Телефон"
-                  /* error={!!errors.email}
-                  helperText={errors.email ? `${errors.email.message}` : ''}
-                  {...register('email')} */
+                    error={!!errors.phone}
+                    helperText={errors.phone ? `${errors.phone.message}` : ''}
+                    {...register('phone')}
                     onChange={handleChange}
                   />
                 </Grid>
@@ -189,9 +189,9 @@ export default function Registration() {
                     type="company"
                     id="company"
                     value={company}
-                  /* error={!!errors.password}
-                  helperText={errors.password ? `${errors.password.message}` : ''}
-                  {...register('password')} */
+                    error={!!errors.password}
+                    helperText={errors.password ? `${errors.password.message}` : ''}
+                    {...register('password')}
                     onChange={handleChange}
                   />
                 </Grid>
@@ -215,7 +215,7 @@ export default function Registration() {
                 type="submit"
                 fullWidth
                 variant="contained"
-                sx={{ mt: 3, mb: 2 }}
+                sx={{ mt: 3, mb: 2, borderRadius: '6' }}
               >
                 Зарегестрироваться
               </Button>

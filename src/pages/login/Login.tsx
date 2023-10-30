@@ -11,7 +11,6 @@ import { ChangeEvent, useState } from 'react';
 import { schema } from '../../utils/validation/yupSchema';
 import userLogin from '../../store/authActions';
 import { useAppDispatch } from '../../store/store';
-import './styles.scss';
 
 export default function Login() {
   const {
@@ -83,9 +82,9 @@ export default function Login() {
                 label="Почта"
                 autoFocus
                 value={email}
-              /* error={!!errors.email}
-              helperText={errors.email ? `${errors.email.message}` : ''}
-              {...register('email')} */
+                error={!!errors.email}
+                helperText={errors.email ? `${errors.email.message}` : ''}
+                {...register('email')}
                 onChange={handleChange}
               />
               <TextField
@@ -108,7 +107,7 @@ export default function Login() {
                 type="submit"
                 fullWidth
                 variant="contained"
-                sx={{ mt: 3, mb: 2 }}
+                sx={{ mt: 3, mb: 2, borderRadius: '6' }}
               >
                 Войти
               </Button>

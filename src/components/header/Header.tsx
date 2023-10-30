@@ -68,7 +68,9 @@ export default function Header() {
               <Button
                 key={page.id}
                 onClick={handleCloseNavMenu}
-                sx={{ textTransform: 'none', color: '#B5B5B7', p: '20px' }}
+                sx={{
+                  textTransform: 'none', color: '#B5B5B7', p: '20px', '&.MuiButtonBase-root:hover': { color: 'white' },
+                }}
                 component={Link}
                 to={page.path}
               >
@@ -77,7 +79,15 @@ export default function Header() {
             ))}
             <Box sx={{ flexGrow: 1 }} />
             <MenuItem>
-              <IconButton color="secondary" component={Link} to="/">
+              <IconButton
+                color="secondary"
+                component={Link}
+                to="/"
+                sx={{
+
+                  '&.MuiButtonBase-root:hover': { color: 'white' },
+                }}
+              >
                 <AccountCircleOutlinedIcon />
               </IconButton>
             </MenuItem>
