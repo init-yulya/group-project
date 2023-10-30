@@ -26,16 +26,17 @@ export const pages = [
   {
     name: 'Home',
     path: '/home',
-    id: 2,
+    id: 3,
   },
+  {
     name: 'Профиль',
     path: '/profile',
-    id: 3,
+    id: 4,
   },
   {
     name: 'Студент',
     path: '/student',
-    id: 4,
+    id: 5,
   },
 ];
 
