@@ -25,15 +25,15 @@ export default function Login() {
     resolver: yupResolver(schema),
   });
   const dispatch = useAppDispatch();
-  const [login, setLogin] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.currentTarget as HTMLInputElement;
     const fieldName = (e.currentTarget as HTMLInputElement).id;
     switch (fieldName) {
-      case 'login':
-        setLogin(value);
+      case 'email':
+        setEmail(value);
         break;
       case 'password':
         setPassword(value);
@@ -45,11 +45,11 @@ export default function Login() {
   const handleSubmitForm = (event: any) => {
     event.preventDefault();
     interface LoginData {
-      login: string,
+      email: string,
       password: string
     }
     const loginData: LoginData = {
-      login,
+      email,
       password,
     };
 
@@ -80,11 +80,10 @@ export default function Login() {
             <TextField
               margin="normal"
               fullWidth
-              id="login"
-              label="Логин"
-              autoComplete="login"
+              id="email"
+              label="email"
               autoFocus
-              value={login}
+              value={email}
               /* error={!!errors.email}
               helperText={errors.email ? `${errors.email.message}` : ''}
               {...register('email')} */
