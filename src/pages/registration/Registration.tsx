@@ -175,9 +175,9 @@ export default function Registration() {
                     id="phoneNumber"
                     value={phoneNumber}
                     label="Телефон"
-                    error={!!errors.phone}
+                    /* error={!!errors.phone}
                     helperText={errors.phone ? `${errors.phone.message}` : ''}
-                    {...register('phone')}
+                    {...register('phone')} */
                     onChange={handleChange}
                   />
                 </Grid>
@@ -189,9 +189,9 @@ export default function Registration() {
                     type="company"
                     id="company"
                     value={company}
-                    error={!!errors.password}
+                    /* error={!!errors.password}
                     helperText={errors.password ? `${errors.password.message}` : ''}
-                    {...register('password')}
+                    {...register('password')} */
                     onChange={handleChange}
                   />
                 </Grid>
