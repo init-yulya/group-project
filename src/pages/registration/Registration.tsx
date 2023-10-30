@@ -12,7 +12,6 @@ import { unwrapResult } from '@reduxjs/toolkit';
 import { Navigate } from 'react-router-dom';
 import { ChangeEvent, useState } from 'react';
 import { schema } from '../../utils/validation/yupSchema';
-import useAuth from '../../utils/useAuth';
 import { useAppDispatch } from '../../store/store';
 import { signupUser } from '../../store/userSlice';
 
@@ -92,9 +91,7 @@ export default function Registration() {
       .then(unwrapResult)
       .catch((reason) => console.log(reason));
   };
-  if (useAuth()) {
-    return <Navigate replace to="/home" />;
-  }
+
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />

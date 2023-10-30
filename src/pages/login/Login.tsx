@@ -11,7 +11,6 @@ import { useForm } from 'react-hook-form';
 import { Navigate } from 'react-router-dom';
 import { ChangeEvent, useState } from 'react';
 import { schema } from '../../utils/validation/yupSchema';
-import useAuth from '../../utils/useAuth';
 import userLogin from '../../store/authActions';
 import { useAppDispatch } from '../../store/store';
 
@@ -55,11 +54,8 @@ export default function Login() {
 
     dispatch(userLogin(loginData)).catch((reason: string) => console.log(reason));
   };
-  if (useAuth()) {
-    return <Navigate replace to="/home" />;
-  }
   return (
-    <Container component="main" maxWidth="xs">
+    <Container component="main" maxWidth="xs" >
       <CssBaseline />
       <form onSubmit={handleSubmitForm}>
         <Box
