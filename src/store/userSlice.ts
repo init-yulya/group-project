@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { axiosInstance } from '../utils/axios';
-import { LoginRequestData, RegisterRequestData, UserSlice } from './userSlice.types';
+import { RegisterRequestData, UserSlice } from './userSlice.types';
 
 const GET_USER = 'GET_USER';
 const SIGN_IN = 'SIGN_IN';

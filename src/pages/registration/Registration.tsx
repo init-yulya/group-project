@@ -14,7 +14,7 @@ import { ChangeEvent, useState } from 'react';
 import { schema } from '../../utils/validation/yupSchema';
 import useAuth from '../../utils/useAuth';
 import { useAppDispatch } from '../../store/store';
-import { getUser, signupUser } from '../../store/userSlice';
+import { signupUser } from '../../store/userSlice';
 
 export default function Registration() {
   const {

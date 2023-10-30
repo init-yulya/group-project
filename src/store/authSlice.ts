@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { userLogin } from './authActions';
+import userLogin from './authActions';
 
 // initialize userToken from local storage
 const userToken = localStorage.getItem('userToken')

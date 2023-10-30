@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import type { RootState } from './store';
 
 export const authApi = createApi({
   reducerPath: 'authApi',
@@ -6,7 +7,7 @@ export const authApi = createApi({
     baseUrl: 'https://tracker-hiring.ddns.net/api/',
 
     prepareHeaders: (headers, { getState }) => {
-      const { token } = getState().auth;
+      const { token } = (getState() as RootState).auth;
       if (token) {
         headers.set('authorization', `Bearer ${token}`);
 

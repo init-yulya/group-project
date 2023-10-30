@@ -8,13 +8,11 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
-import { unwrapResult } from '@reduxjs/toolkit';
-import { Navigate, useNavigate } from 'react-router-dom';
-import { ChangeEvent, useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { Navigate } from 'react-router-dom';
+import { ChangeEvent, useState } from 'react';
 import { schema } from '../../utils/validation/yupSchema';
 import useAuth from '../../utils/useAuth';
-import { userLogin } from '../../store/authActions';
+import userLogin from '../../store/authActions';
 import { useAppDispatch } from '../../store/store';
 
 export default function Login() {
@@ -29,16 +27,6 @@ export default function Login() {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-/*
-  const { userInfo } = useSelector((state) => state.auth);
-  // const dispatch = useDispatch();
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (userInfo) {
-      navigate('/home');
-    }
-  }, [navigate, userInfo]);*/
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.currentTarget as HTMLInputElement;

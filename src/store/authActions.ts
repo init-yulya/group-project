@@ -1,12 +1,12 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { LoginRequestData } from './userSlice.types';
 
 const backendURL = 'https://tracker-hiring.ddns.net/api/';
 
-// eslint-disable-next-line import/prefer-default-export
-export const userLogin = createAsyncThunk(
+const userLogin = createAsyncThunk(
   'auth/jwt/create/',
-  async ({ email, password }, { rejectWithValue }) => {
+  async (loginData: LoginRequestData, { rejectWithValue }) => {
     try {
       // configure header's Content-Type as JSON
       const config = {
@@ -17,7 +17,7 @@ export const userLogin = createAsyncThunk(
 
       const { data } = await axios.post(
         `${backendURL}auth/jwt/create/`,
-        { email, password },
+        loginData,
         config,
       );
 
@@ -25,7 +25,7 @@ export const userLogin = createAsyncThunk(
       localStorage.setItem('userToken', data.userToken);
 
       return data;
-    } catch (error) {
+    } catch (error: any) {
       // return custom error message from API if any
       if (error.response && error.response.data.error_message) {
         return rejectWithValue(error.response.data.error_message);
@@ -34,3 +34,5 @@ export const userLogin = createAsyncThunk(
     }
   },
 );
+
+export default userLogin;
