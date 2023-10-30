@@ -12,6 +12,7 @@ import { useAppDispatch } from '../../store/store';
 // import { clearUser, logoutUser } from '../../store/userSlice';
 import { logout, setCredentials } from '../../store/authSlice';
 import { useGetDetailsQuery } from '../../store/authService'
+import { useSelector } from 'react-redux';
 
 export const pages = [
   {
@@ -51,7 +52,7 @@ export default function Header() {
   };
 
   return (
-    <AppBar position="static" sx={{ backgroundColor: '#1A1B22', height: '60px' }}>
+    <AppBar position="static" sx={{ backgroundColor: '#1A1B22', height: '65px' }}>
       <Container maxWidth="xl">
         <Toolbar>
           <MenuItem component={Link} to="/">
