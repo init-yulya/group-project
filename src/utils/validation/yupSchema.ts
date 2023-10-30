@@ -6,6 +6,8 @@ export const errors = {
   minLength: 'Минимальная длина 8 символов',
   minLength2: 'Минимальная длина 2 символа',
   InvalidPassword: 'Пароль должен содержать спецсимвол, однин заглавный символ, одну цифру',
+  InvalidTelegram: 'Введите корректный telegram, он должен начинаться с "@"',
+  InvalidPhoneNumber: 'Введите корректный номер телефона',
 };
 
 export const schema = yup.object().shape({
@@ -14,4 +16,8 @@ export const schema = yup.object().shape({
     .required(errors.RequiredField).matches(/^(?=.*[A-Z])(?=.*[0-9]).{8,40}$/, errors.InvalidPassword),
   name: yup.string().required(errors.RequiredField).min(2, errors.minLength2),
   lastName: yup.string().required(errors.RequiredField).min(2, errors.minLength2),
+  telegram: yup.string().matches(/^@[A-Za-z\d_-]{5,32}$/, errors.InvalidTelegram),
+  phoneNumber: yup.string().matches(/^\d{11}$/, errors.InvalidPhoneNumber),
+  company: yup.string().min(2, errors.minLength2),
+  avatar: yup.string().min(8, errors.minLength),
 });

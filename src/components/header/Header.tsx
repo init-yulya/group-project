@@ -28,6 +28,15 @@ export const pages = [
     path: '/home',
     id: 2,
   },
+    name: 'Профиль',
+    path: '/profile',
+    id: 3,
+  },
+  {
+    name: 'Студент',
+    path: '/student',
+    id: 4,
+  },
 ];
 
 export default function Header() {
