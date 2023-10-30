@@ -6,12 +6,14 @@ import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import { Store } from '../../store/store.types';
 import { useAppDispatch } from '../../store/store';
-import { clearUser, logoutUser } from '../../store/userSlice';
+// import { clearUser, logoutUser } from '../../store/userSlice';
+import { logout, setCredentials } from '../../store/authSlice';
+import { useGetDetailsQuery } from '../../store/authService'
 
 export const pages = [
   {
@@ -27,25 +29,27 @@ export const pages = [
 ];
 
 export default function Header() {
+  // const { userInfo } = useSelector((state) => state.auth);
   const dispatch = useAppDispatch();
-  const user = useSelector((state: Store) => state.user.user);
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
 
-  const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElNav(event.currentTarget);
-  };
+  // automatically authenticate user if token is found
+  const { data, isFetching } = useGetDetailsQuery('userDetails', {
+    pollingInterval: 900000, // 15mins
+  });
+
+  useEffect(() => {
+    if (data) dispatch(setCredentials(data));
+  }, [data, dispatch]);
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
 
   const onLogout = () => {
-    setAnchorElNav(null);
+    // setAnchorElNav(null);
 
-    dispatch(logoutUser())
-      .then(() => {
-        dispatch(clearUser());
-      });
+    dispatch(logout());
   };
 
   return (
