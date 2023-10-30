@@ -56,6 +56,8 @@ export default function Registration() {
       case 'password':
         setPassword(value);
         break;
+      default:
+        break;
     }
   };
 
