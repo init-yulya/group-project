@@ -16,7 +16,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import SearchIcon from '@mui/icons-material/Search';
 import { blue } from '@mui/material/colors';
-import { useState, ChangeEvent, FormEvent } from 'react';
+import { useState, ChangeEvent } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import { schema } from '../../utils/validation/yupSchema';
@@ -100,6 +100,7 @@ export default function Profile() {
       phoneNumber,
       telegram,
     };
+    console.log(updateData);
   };
 
   function handleEditClick() {
@@ -194,7 +195,6 @@ export default function Profile() {
                       {testData.email}
                     </Typography>
                     <IconButton
-                      onClick={handleEditClick}
                       sx={{
                         width: 30,
                         height: 30,
@@ -202,6 +202,7 @@ export default function Profile() {
                         top: 10,
                         right: 10,
                       }}
+                      onClick={handleEditClick}
                     >
                       <EditIcon fontSize="small" />
                     </IconButton>
@@ -383,8 +384,8 @@ export default function Profile() {
                         defaultValue={testData.firstName}
                         error={!!errors.name}
                         helperText={errors.name ? `${errors.name.message}` : ''}
-                        onChange={handleChange}
                         {...register('name')}
+                        onChange={handleChange}
                       />
                       <TextField
                         required
@@ -396,6 +397,7 @@ export default function Profile() {
                         error={!!errors.lastName}
                         helperText={errors.lastName ? `${errors.lastName.message}` : ''}
                         {...register('lastName')}
+                        onChange={handleChange}
                       />
                     </Box>
                   </Box>
@@ -408,6 +410,7 @@ export default function Profile() {
                     error={!!errors.avatar}
                     helperText={errors.avatar ? `${errors.avatar.message}` : ''}
                     {...register('avatar')}
+                    onChange={handleChange}
                   />
                 </Grid>
                 <Grid
@@ -427,6 +430,7 @@ export default function Profile() {
                     error={!!errors.company}
                     helperText={errors.company ? `${errors.company.message}` : ''}
                     {...register('company')}
+                    onChange={handleChange}
                   />
                   <Grid container spacing={2}>
                     <Grid item xs={12} sm={6}>
@@ -440,6 +444,7 @@ export default function Profile() {
                         error={!!errors.email}
                         helperText={errors.email ? `${errors.email.message}` : ''}
                         {...register('email')}
+                        onChange={handleChange}
                       />
                     </Grid>
                     <Grid item xs={12} sm={6}>
@@ -453,6 +458,7 @@ export default function Profile() {
                         error={!!errors.password}
                         helperText={errors.password ? `${errors.password.message}` : ''}
                         {...register('password')}
+                        onChange={handleChange}
                       />
                     </Grid>
                     <Grid item xs={12} sm={6}>
@@ -465,6 +471,7 @@ export default function Profile() {
                         error={!!errors.telegram}
                         helperText={errors.telegram ? `${errors.telegram.message}` : ''}
                         {...register('telegram')}
+                        onChange={handleChange}
                       />
                     </Grid>
                     <Grid item xs={12} sm={6}>
@@ -477,6 +484,7 @@ export default function Profile() {
                         error={!!errors.phoneNumber}
                         helperText={errors.phoneNumber ? `${errors.phoneNumber.message}` : ''}
                         {...register('phoneNumber')}
+                        onChange={handleChange}
                       />
                     </Grid>
                   </Grid>
@@ -515,4 +523,3 @@ export default function Profile() {
     </>
   );
 }
-
