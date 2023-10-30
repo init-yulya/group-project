@@ -6,7 +6,7 @@ export const errors = {
   minLength: 'Минимальная длина 8 символов',
   minLength2: 'Минимальная длина 2 символа',
   InvalidPassword: 'Пароль должен содержать спецсимвол, однин заглавный символ, одну цифру',
-  InvalidTelegram: 'Введите корректный telegram, он должен начинаться с "@"',
+  InvalidTelegram: 'Введите корректный telegram',
   InvalidPhoneNumber: 'Введите корректный номер телефона',
 };
 
