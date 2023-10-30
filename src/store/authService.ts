@@ -7,7 +7,7 @@ export const authApi = createApi({
     baseUrl: 'https://tracker-hiring.ddns.net/api/',
 
     prepareHeaders: (headers, { getState }) => {
-      const { token } = (getState() as RootState).auth;
+      const { token } = (getState()).auth;
       if (token) {
         headers.set('authorization', `Bearer ${token}`);
 
