@@ -9,7 +9,6 @@ import {
   Button,
   Box,
   IconButton,
-  Autocomplete,
   InputAdornment,
 } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
@@ -17,7 +16,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import SearchIcon from '@mui/icons-material/Search';
 import { blue } from '@mui/material/colors';
-import { useState } from 'react';
+import { useState, ChangeEvent, FormEvent } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import { schema } from '../../utils/validation/yupSchema';
@@ -43,15 +42,68 @@ export default function Profile() {
     resolver: yupResolver(schema),
   });
   const [isProfileEdit, setIsProfileEdit] = useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [telegram, setTelegram] = useState('');
+  const [company, setCompany] = useState('');
 
-  const handleSubmitForm = (event: any) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.currentTarget as HTMLInputElement;
+    const fieldName = (e.currentTarget as HTMLInputElement).id;
+    switch (fieldName) {
+      case 'firstName':
+        setFirstName(value);
+        break;
+      case 'lastName':
+        setLastName(value);
+        break;
+      case 'telegram':
+        setTelegram(value);
+        break;
+      case 'email':
+        setEmail(value);
+        break;
+      case 'phoneNumber':
+        setPhoneNumber(value);
+        break;
+      case 'company':
+        setCompany(value);
+        break;
+      case 'password':
+        setPassword(value);
+        break;
+      default:
+        break;
+    }
+  };
+
+  const handleSubmitForm = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
+    interface UpdateData {
+      email: string,
+      password: string,
+      firstName: string,
+      lastName: string,
+      company: string,
+      phoneNumber: string,
+      telegram: string,
+    }
+    const updateData: UpdateData = {
+      email,
+      password,
+      firstName,
+      lastName,
+      company,
+      phoneNumber,
+      telegram,
+    };
   };
 
   function handleEditClick() {
     setIsProfileEdit(!isProfileEdit);
-    console.log(isProfileEdit);
   }
 
   return (
@@ -155,7 +207,6 @@ export default function Profile() {
                     </IconButton>
                   </Box>
                 </Box>
-                {/*                                                                      */}
                 <Box
                   sx={{
                     border: '1px solid rgba(0, 0, 0, .2)',
@@ -174,7 +225,7 @@ export default function Profile() {
                       border: '1px solid rgba(0, 0, 0, .2)',
                       borderRadius: 1,
                       p: 1,
-                      height: 200,
+                      height: 218,
                     }}
                   >
                     <Typography
@@ -199,7 +250,6 @@ export default function Profile() {
                     <EditIcon fontSize="small" />
                   </IconButton>
                 </Box>
-                {/*                                                                      */}
               </Grid>
               <Grid
                 item
@@ -297,7 +347,7 @@ export default function Profile() {
             </Grid>
           )
           : (
-            <form onSubmit={handleSubmit(handleSubmitForm)} noValidate>
+            <form onSubmit={handleSubmitForm} noValidate>
               <Grid container spacing={4}>
                 <Grid
                   item
@@ -333,6 +383,7 @@ export default function Profile() {
                         defaultValue={testData.firstName}
                         error={!!errors.name}
                         helperText={errors.name ? `${errors.name.message}` : ''}
+                        onChange={handleChange}
                         {...register('name')}
                       />
                       <TextField
@@ -419,7 +470,7 @@ export default function Profile() {
                     <Grid item xs={12} sm={6}>
                       <TextField
                         fullWidth
-                        id="phone"
+                        id="phoneNumber"
                         label="Номер телефона"
                         variant="outlined"
                         defaultValue={testData.phoneNumber}
@@ -464,3 +515,4 @@ export default function Profile() {
     </>
   );
 }
+
