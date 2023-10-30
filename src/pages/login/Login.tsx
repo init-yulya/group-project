@@ -8,13 +8,12 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
-import { unwrapResult } from '@reduxjs/toolkit';
 import { Navigate } from 'react-router-dom';
 import { ChangeEvent, useState } from 'react';
 import { schema } from '../../utils/validation/yupSchema';
 import useAuth from '../../utils/useAuth';
+import userLogin from '../../store/authActions';
 import { useAppDispatch } from '../../store/store';
-import { getUser, signinUser } from '../../store/userSlice';
 
 export default function Login() {
   const {
@@ -25,6 +24,7 @@ export default function Login() {
     resolver: yupResolver(schema),
   });
   const dispatch = useAppDispatch();
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -55,10 +55,7 @@ export default function Login() {
       password,
     };
 
-    dispatch(signinUser(loginData))
-      .then(unwrapResult)
-      .then(() => dispatch(getUser()))
-      .catch((reason) => console.log(reason));
+    dispatch(userLogin(loginData)).catch((reason: string) => console.log(reason));
   };
   if (useAuth()) {
     return <Navigate replace to="/home" />;
