@@ -9,10 +9,8 @@ import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import { useAppDispatch } from '../../store/store';
-// import { clearUser, logoutUser } from '../../store/userSlice';
 import { logout, setCredentials } from '../../store/authSlice';
-import { useGetDetailsQuery } from '../../store/authService'
-import { useSelector } from 'react-redux';
+import { useGetDetailsQuery } from '../../store/authService';
 
 export const pages = [
   {
@@ -25,14 +23,17 @@ export const pages = [
     path: '/registration',
     id: 2,
   },
+  {
+    name: 'Home',
+    path: '/home',
+    id: 2,
+  },
 ];
 
 export default function Header() {
-  // const { userInfo } = useSelector((state) => state.auth);
   const dispatch = useAppDispatch();
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
 
-  // automatically authenticate user if token is found
   const { data, isFetching } = useGetDetailsQuery('userDetails', {
     pollingInterval: 900000, // 15mins
   });
@@ -46,8 +47,6 @@ export default function Header() {
   };
 
   const onLogout = () => {
-    // setAnchorElNav(null);
-
     dispatch(logout());
   };
 
@@ -87,7 +86,12 @@ export default function Header() {
                 variant="outlined"
                 onClick={onLogout}
                 sx={{
-                  textTransform: 'none', color: 'white', borderColor: 'white', fontSize: '14px', borderRadius: '6',
+                  textTransform: 'none',
+                  color: 'white',
+                  borderColor: 'white',
+                  fontSize: '14px',
+                  borderRadius: '6',
+                  '&.MuiButtonBase-root:hover': { borderColor: 'white' },
                 }}
               >
                 Выйти
