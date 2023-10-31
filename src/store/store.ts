@@ -2,11 +2,13 @@ import { useDispatch } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
 import { userReducer } from './userSlice';
 import { authApi } from './authService';
+import studentReducer from './studensSlice';
 
 export const store = configureStore({
   reducer: {
     user: userReducer,
     [authApi.reducerPath]: authApi.reducer,
+    students: studentReducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(authApi.middleware),
 });
