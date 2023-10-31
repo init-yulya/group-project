@@ -81,7 +81,7 @@ export default function Login() {
                 margin="normal"
                 fullWidth
                 id="email"
-                label="Почта"
+                placeholder="Почта"
                 autoFocus
                 value={email}
                 error={!!errors.email}
@@ -92,7 +92,7 @@ export default function Login() {
               <TextField
                 margin="normal"
                 fullWidth
-                label="Пароль"
+                placeholder="Пароль"
                 type="password"
                 id="password"
                 autoComplete="current-password"
@@ -117,7 +117,7 @@ export default function Login() {
             </Box>
           </Box>
         </form>
-        <Box>
+        <Box sx={{ display: 'flex', justifyContent: 'center'}}>
           <Link
             href="/registration"
             variant="body2"
@@ -125,7 +125,6 @@ export default function Login() {
             sx={{
               px: 3,
               py: 3,
-              alignItems: 'center',
             }}
           >
             Новый пользователь? Зарегестрироваться
