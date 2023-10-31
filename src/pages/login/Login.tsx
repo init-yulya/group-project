@@ -76,6 +76,9 @@ export default function Login() {
             <Typography component="h2" variant="h5" sx={{ fontSize: 24 }}>
               Карьерный Трекер.Найм
             </Typography>
+            <Typography component="h2" variant="body1" sx={{ fontSize: 16, color: '#797981', margin: '24px auto 15px' }}>
+              Войти в аккаунт
+            </Typography>
             <Box sx={{ mt: 1 }}>
               <TextField
                 margin="normal"
@@ -103,13 +106,13 @@ export default function Login() {
                 onChange={handleChange}
               />
               <Link href="#" variant="body2" underline="none">
-                Забыл пароль
+                Не помню пароль
               </Link>
               <Button
                 type="submit"
                 fullWidth
                 variant="contained"
-                sx={{ mt: 3, mb: 2, borderRadius: '6' }}
+                sx={{ mt: 3, mb: 2, borderRadius: '6', height: 50 }}
               >
                 Войти
               </Button>
@@ -117,17 +120,15 @@ export default function Login() {
             </Box>
           </Box>
         </form>
-        <Box sx={{ display: 'flex', justifyContent: 'center'}}>
+        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '10px' }}>
+          <Typography variant="body1" sx={{ fontWeight: 400, color: '#797981' }}>Новый пользователь?</Typography>
           <Link
             href="/registration"
             variant="body2"
             underline="none"
-            sx={{
-              px: 3,
-              py: 3,
-            }}
+            sx={{ py: 3 }}
           >
-            Новый пользователь? Зарегистрироваться
+            Зарегистрироваться
           </Link>
         </Box>
       </Container>

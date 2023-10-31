@@ -114,6 +114,9 @@ export default function Registration() {
             <Typography component="h2" variant="h5" sx={{ fontSize: 24 }}>
               Карьерный Трекер.Найм
             </Typography>
+            <Typography component="h2" variant="body1" sx={{ fontSize: 16, color: '#797981', margin: '24px auto 15px' }}>
+              Зарегистрировать аккаунт
+            </Typography>
             <Box sx={{ mt: 3 }}>
               <Grid container spacing={2}>
                 <Grid item xs={12} sm={6}>
@@ -122,7 +125,7 @@ export default function Registration() {
                     fullWidth
                     id="first_name"
                     value={firstName}
-                    label="Имя"
+                    placeholder="Имя"
                     error={!!errors.name}
                     helperText={errors.name ? `${errors.name.message}` : ''}
                     {...register('name')}
@@ -135,7 +138,7 @@ export default function Registration() {
                     fullWidth
                     id="last_name"
                     value={secondName}
-                    label="Фамилия"
+                    placeholder="Фамилия"
                     autoComplete="family-name"
                     error={!!errors.lastName}
                     helperText={errors.lastName ? `${errors.lastName.message}` : ''}
@@ -149,7 +152,7 @@ export default function Registration() {
                     fullWidth
                     id="telegram"
                     value={telegram}
-                    label="telegram"
+                    placeholder="telegram"
                     error={!!errors.lastName}
                     helperText={errors.lastName ? `${errors.lastName.message}` : ''}
                     {...register('lastName')}
@@ -162,7 +165,7 @@ export default function Registration() {
                     fullWidth
                     id="email"
                     value={email}
-                    label="Почта"
+                    placeholder="Почта"
                     autoComplete="email"
                     error={!!errors.email}
                     helperText={errors.email ? `${errors.email.message}` : ''}
@@ -176,7 +179,7 @@ export default function Registration() {
                     fullWidth
                     id="phoneNumber"
                     value={phoneNumber}
-                    label="Телефон"
+                    placeholder="Телефон"
                     /* error={!!errors.phone}
                     helperText={errors.phone ? `${errors.phone.message}` : ''}
                     {...register('phone')} */
@@ -187,7 +190,7 @@ export default function Registration() {
                   <TextField
                     required
                     fullWidth
-                    label="Компания"
+                    placeholder="Компания"
                     type="company"
                     id="company"
                     value={company}
@@ -201,7 +204,7 @@ export default function Registration() {
                   <TextField
                     required
                     fullWidth
-                    label="Пароль"
+                    placeholder="Пароль"
                     type="password"
                     id="password"
                     value={password}
@@ -217,17 +220,30 @@ export default function Registration() {
                 type="submit"
                 fullWidth
                 variant="contained"
-                sx={{ mt: 3, mb: 2, borderRadius: '6' }}
+                sx={{
+                  mt: 3, mb: 2, borderRadius: '6', height: 50,
+                }}
               >
-                Зарегестрироваться
+                Зарегистрироваться
               </Button>
             </Box>
           </Box>
         </form>
-        <Grid container justifyContent="flex-end">
-          <Grid item>
-            <Link href="/login" variant="body2" underline="none">
-              Уже есть аккаунт?
+        <Grid container justifyContent="center">
+          <Grid
+            item
+            sx={{
+              display: 'flex', alignItems: 'center', gap: '10px',
+            }}
+          >
+            <Typography variant="body1" sx={{ fontWeight: 400, color: '#797981' }}>Уже есть аккаунт?</Typography>
+            <Link
+              href="/login"
+              variant="body2"
+              underline="none"
+              sx={{ py: 3 }}
+            >
+              Войти
             </Link>
           </Grid>
         </Grid>
