@@ -17,6 +17,7 @@ import SaveStudents from './pages/SaveStudents/SaveStudents';
 import CreateVacancy from './pages/CreateVacancy/CreateVacancy';
 import ActiveVacancy from './pages/ActiveVacanciesPage/ActiveVacanciesPage';
 import ArchivedVacancy from './pages/ArchivedVacanciesPage/ArchivedVacanciesPage';
+import Student from './pages/student/Student';
 
 export default function App() {
   return (
@@ -28,6 +29,7 @@ export default function App() {
         <Route path="/registration" element={<Registration />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/home" element={<Home />} />
+        <Route path="/student" element={<Student />} />
         <Route path="*" element={<Navigate to="/" replace />} />
         <Route path="/vacancies" element={<CreateVacancy />} />
         <Route path="/vacancies/active" element={<ActiveVacancy />} />

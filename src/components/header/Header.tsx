@@ -11,7 +11,7 @@ import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined
 import { useAppDispatch } from '../../store/store';
 // import { clearUser, logoutUser } from '../../store/userSlice';
 import { logout, setCredentials } from '../../store/authSlice';
-import { useGetDetailsQuery } from '../../store/authService'
+import { useGetDetailsQuery } from '../../store/authService';
 
 export const pages = [
   {
@@ -23,11 +23,6 @@ export const pages = [
     name: 'Регистрация',
     path: '/registration',
     id: 2,
-  },
-  {
-    name: 'Профиль',
-    path: '/profile',
-    id: 3,
   },
 ];
 
