@@ -1,3 +1,4 @@
+import { redirect } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
@@ -53,7 +54,11 @@ export default function Login() {
       password,
     };
 
-    dispatch(userLogin(loginData)).catch((reason: string) => console.log(reason));
+    dispatch(userLogin(loginData))
+    .then(() => {
+      redirect('/profile');
+    })
+    .catch((reason: string) => console.log(reason));
   };
   return (
     <Container component="main" className="authPage">
