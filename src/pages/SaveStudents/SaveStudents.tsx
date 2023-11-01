@@ -9,7 +9,7 @@ export default function SaveStudents() {
       <NavigationMenu />
       <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
         <Typography variant="h3" color="#797981" paddingTop="310px" textAlign="center">
-          Кажется десь пока никого нет...
+          Кажется здесь пока никого нет...
         </Typography>
         <HeartBrokenIcon sx={{ color: '#00000052' }} fontSize="large" />
       </Box>
