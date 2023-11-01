@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unused-expressions */
+/* eslint-disable no-console */
+import { useNavigate } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
@@ -24,6 +27,7 @@ export default function Registration() {
   });
 
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const [firstName, setFirstName] = useState('');
   const [secondName, setSecondName] = useState('');
@@ -89,7 +93,11 @@ export default function Registration() {
     };
 
     dispatch(signupUser(registrationData))
-      .then(unwrapResult)
+      .then(() => {
+        // Навигация только после успешного запроса
+        navigate('/profile', { replace: true });
+        unwrapResult;
+      })
       .catch((reason) => console.log(reason));
   };
 

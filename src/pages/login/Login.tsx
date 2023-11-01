@@ -1,4 +1,5 @@
-import { redirect } from 'react-router-dom';
+/* eslint-disable no-console */
+import { useNavigate } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
@@ -22,7 +23,7 @@ export default function Login() {
     resolver: yupResolver(schema),
   });
   const dispatch = useAppDispatch();
-
+  const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -55,10 +56,11 @@ export default function Login() {
     };
 
     dispatch(userLogin(loginData))
-    .then(() => {
-      redirect('/profile');
-    })
-    .catch((reason: string) => console.log(reason));
+      .then(() => {
+      // Навигация только после успешного запроса
+        navigate('/vacancies', { replace: true });
+      })
+      .catch((reason: string) => console.log(reason));
   };
   return (
     <Container component="main" className="authPage">
@@ -117,7 +119,9 @@ export default function Login() {
                 type="submit"
                 fullWidth
                 variant="contained"
-                sx={{ mt: 3, mb: 2, borderRadius: '6', height: 50 }}
+                sx={{
+                  mt: 3, mb: 2, borderRadius: '6', height: 50,
+                }}
               >
                 Войти
               </Button>
@@ -125,7 +129,10 @@ export default function Login() {
             </Box>
           </Box>
         </form>
-        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '10px' }}>
+        <Box sx={{
+          display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '10px',
+        }}
+        >
           <Typography variant="body1" sx={{ fontWeight: 400, color: '#797981' }}>Новый пользователь?</Typography>
           <Link
             href="/registration"

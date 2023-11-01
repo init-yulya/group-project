@@ -38,6 +38,17 @@ export const pages = [
     path: '/student',
     id: 5,
   },
+  {
+    name: 'Создать вакансию',
+    path: '/vacancies',
+    id: 6,
+  },
+  {
+    name: 'Таблица кандидатов',
+    path: '/students',
+    id: 7,
+  },
+
 ];
 
 export default function Header() {
