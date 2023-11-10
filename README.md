@@ -18,7 +18,7 @@ frontend часть командного проекта в рамках хака
 
 ## Используемые технологии
 
-* Ract
+* React
 * Redux Toolkit
 * TypeScript
 * Material UI
